@@ -1,6 +1,6 @@
 {
   "name": "Testserver",
   "author": "micartey",
-  "main": "me.micartey.testserver",
+  "main": "me.micartey.testserver.Core",
   "version": "v1.0"
 }
