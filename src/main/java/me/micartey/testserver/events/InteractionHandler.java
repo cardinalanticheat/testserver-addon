@@ -23,7 +23,7 @@ public class InteractionHandler implements Listener {
             return;
 
         // Prevent players from extinglishing fire
-        if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+        if (event.getAction() != null && event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if (event.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType().equals(Material.FIRE)) {
                 event.setCancelled(true);
                 return;
@@ -31,7 +31,7 @@ public class InteractionHandler implements Listener {
         }
 
         // Prevent players from interacting with dragon eggs
-        if (event.getClickedBlock().getType().equals(Material.DRAGON_EGG)) {
+        if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.DRAGON_EGG)) {
             event.setCancelled(true);
             return;
         }
