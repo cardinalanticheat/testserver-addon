@@ -15,7 +15,7 @@ public class GiveCommand implements Command {
     private static final List<Material> BLOCKED_ITEMS = Arrays.asList(
             Material.TNT, Material.BUCKET, Material.LAVA_BUCKET, Material.WATER_BUCKET, Material.MILK_BUCKET,
             Material.SAND, Material.FLINT, Material.ARMOR_STAND, Material.EXPLOSIVE_MINECART, Material.MINECART,
-            Material.COMMAND, Material.COMMAND_MINECART
+            Material.COMMAND, Material.COMMAND_MINECART, Material.ARMOR_STAND
     );
 
     @Override
