@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -51,4 +52,8 @@ public class InteractionHandler implements Listener {
         event.setCancelled(true);
     }
 
+    @EventHandler
+    public void onCraft(CraftItemEvent event) {
+        event.setCancelled(true);
+    }
 }
