@@ -12,10 +12,9 @@ import java.util.Optional;
 
 public class GiveCommand implements Command {
 
-    private static final List<Material> BLOCKED_ITEMS = Arrays.asList(
-            Material.TNT, Material.BUCKET, Material.LAVA_BUCKET, Material.WATER_BUCKET, Material.MILK_BUCKET,
-            Material.SAND, Material.FLINT, Material.ARMOR_STAND, Material.EXPLOSIVE_MINECART, Material.MINECART,
-            Material.COMMAND, Material.COMMAND_MINECART, Material.ARMOR_STAND
+    private static final List<String> BLOCKED_ITEMS = Arrays.asList(
+            "TNT", "BUCKET", "EXPLOSIVE", "SAND", "FLINT", "ARMOR_STAND", "MINECART",
+            "COMMAND"
     );
 
     @Override
@@ -35,7 +34,7 @@ public class GiveCommand implements Command {
         }
 
         Optional.ofNullable(Material.getMaterial(args[1].toUpperCase())).ifPresent(material -> {
-            if (BLOCKED_ITEMS.contains(material)) {
+            if (BLOCKED_ITEMS.stream().anyMatch(blocked -> material.name().contains(blocked))) {
                 sender.sendMessage("§c§lServer§7: This item is blocked!");
                 return;
             }
