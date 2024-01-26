@@ -17,6 +17,7 @@ public class Core implements Addon {
         Extension.registerListener(this, new JoinLeaveMessageHandler());
         Extension.registerListener(this, new InteractionHandler());
         Extension.registerListener(this, new PlayerDeathHandler());
+        Extension.registerListener(this, new InventoryHandler());
 
         // Commands
         Extension.registerCommand(this, new GiveCommand());
