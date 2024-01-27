@@ -8,6 +8,6 @@ public class InventoryHandler implements Listener {
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        event.setCancelled(true);
+        event.getItemDrop().getItemStack().setAmount(0);
     }
 }
