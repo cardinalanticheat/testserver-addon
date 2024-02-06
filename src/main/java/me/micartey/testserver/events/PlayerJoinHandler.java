@@ -11,8 +11,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.util.Vector;
-import xyz.jonesdev.neutron.NeutronBukkitPlugin;
-import xyz.jonesdev.neutron.api.user.NeutronUserRegistry;
 
 import java.util.Optional;
 
@@ -23,9 +21,6 @@ public class PlayerJoinHandler implements EventListener {
         Player player = event.getPlayer();
 
         // We can access the player controller and be sure that it has been initialized
-        NeutronUserRegistry.fromBukkitPlayer(player).setDevelopmentMode(true);
-        NeutronUserRegistry.fromBukkitPlayer(player).setExempted(true);
-
         PlayerController.of(player).setShowingFlags(true);
 
         // Teleport player to world spawn
