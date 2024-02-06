@@ -2,10 +2,8 @@ package me.micartey.testserver;
 
 import me.clientastisch.cardinal.extension.Extension;
 import me.clientastisch.cardinal.extension.impl.Addon;
-import me.micartey.testserver.commands.AnticheatCommand;
 import me.micartey.testserver.commands.GiveCommand;
 import me.micartey.testserver.events.*;
-import me.micartey.testserver.inventories.AnticheatSelectInventory;
 
 public class Core implements Addon {
 
@@ -28,11 +26,8 @@ public class Core implements Addon {
         Extension.registerListener(this, new InventoryHandler());
         Extension.registerListener(this, new JumpadHandler());
 
-        Extension.registerListener(this, new AnticheatSelectInventory());
-
         // Commands
         Extension.registerCommand(this, new GiveCommand());
-        Extension.registerCommand(this, new AnticheatCommand());
     }
 
     @Override
