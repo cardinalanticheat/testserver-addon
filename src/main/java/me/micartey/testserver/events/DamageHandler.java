@@ -11,7 +11,7 @@ public class DamageHandler implements Listener {
         if (event.getDamage() <= 0)
             return;
 
-        event.getEntity().sendMessage("§7You took §c" + event.getDamage() + " ♥ §damage!");
+        event.getEntity().sendMessage("§7You took §c" + event.getDamage() + " ♥ §7damage!");
         event.setDamage(0);
     }
 }
