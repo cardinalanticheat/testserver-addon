@@ -11,6 +11,12 @@ public class DamageHandler implements Listener {
         if (event.getDamage() <= 0)
             return;
 
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
+            event.getEntity().sendMessage("§7That was a bit to hot!");
+            event.setDamage(100);
+            return;
+        }
+
         if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
             event.setDamage(0);
             return;
