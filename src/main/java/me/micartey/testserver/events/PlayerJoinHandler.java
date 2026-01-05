@@ -24,34 +24,47 @@ public class PlayerJoinHandler implements EventListener {
         PlayerController.of(player).setShowingFlags(true);
 
         // Teleport player to world spawn
-        Bukkit.getScheduler().runTask(Core.INSTANCE.plugin, () -> {
+        Bukkit.getScheduler().runTaskLater(Core.INSTANCE.plugin, () -> {
             player.teleport(
                     player.getWorld().getSpawnLocation().add(.5, 0, .5)
             );
 
             spawnFireworks(player.getLocation(), 5, 10);
-        });
+        }, 30);
 
         // Send notice if present (Keep it simple)
         Optional.ofNullable(System.getenv("TESTSERVER_JOIN_NOTICE"))
                 .ifPresent(player::sendMessage);
     }
 
+    /**
+     * Spawn fireforks around a circle location.
+     * This method is subject to change as it will need to be adjusted with changes to the mincraft api.
+     *
+     * @param location center location
+     * @param amount   amount of fireworks
+     * @param diameter the diameter of the circle
+     */
     private void spawnFireworks(Location location, int amount, int diameter) {
-        World world = location.getWorld();
-
-        for (int i = 0; i < amount; i++) {
+        for(int i = 0; i < amount; i++) {
             Location randomLocation = location.clone().add(new Vector(Math.random() - 0.5, 0, Math.random() - 0.5).multiply(diameter));
-            Firework firework = (Firework) world.spawnEntity(randomLocation, EntityType.FIREWORK);
-            FireworkMeta fireworkMeta = firework.getFireworkMeta();
 
-            fireworkMeta.setPower(i);
-            fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.RED).flicker(true).build());
+            Firework firework = (Firework) location.getWorld().spawnEntity(randomLocation, EntityType.valueOf("FIREWORK_ROCKET"));
+            FireworkMeta meta = firework.getFireworkMeta();
 
-            firework.setFireworkMeta(fireworkMeta);
+            FireworkEffect effect = FireworkEffect.builder()
+                    .withColor(Color.RED)
+                    .with(FireworkEffect.Type.BURST)
+                    .flicker(true)
+                    .trail(true)
+                    .build();
+
+            // Apply effect and power
+            meta.addEffect(effect);
+            meta.setPower(4); // 1 = Short flight duration
+
+            firework.setFireworkMeta(meta);
             firework.detonate();
-
-            firework.setFireworkMeta(fireworkMeta);
         }
     }
 }
