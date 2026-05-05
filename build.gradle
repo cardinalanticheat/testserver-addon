@@ -21,6 +21,16 @@ repositories {
     maven { url 'https://libraries.minecraft.net/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://jitpack.io' }
+
+    ivy {
+        url = 'https://raw.githubusercontent.com/cardinalanticheat/addon-api/e52c2ef713232a33e7faeb053bd449e414406cfa/'
+        patternLayout {
+            artifact '[artifact].[ext]'
+        }
+        metadataSources {
+            artifact()
+        }
+    }
 }
 
 dependencies {
@@ -34,7 +44,11 @@ dependencies {
 
     compileOnly files('libs/neutron-SNAPSHOT.jar')
 
-    compileOnly 'com.github.cardinalanticheat:addon-api:master-SNAPSHOT'
+    compileOnly name: 'addon-api', ext: 'jar', version: '1.1.0', changing: true
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
